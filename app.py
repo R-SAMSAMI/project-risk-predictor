@@ -631,15 +631,15 @@ def render_prediction_charts(project_input: dict[str, object], prediction: dict[
     left, right = st.columns(2)
     with left:
         chart_panel("Risk summary", "A quick view of the three main outcome signals for this project.")
-        st.altair_chart(style_chart(risk_chart + risk_text), use_container_width=True)
+        st.altair_chart(style_chart(risk_chart + risk_text), width="stretch")
         st.markdown("</div>", unsafe_allow_html=True)
     with right:
         chart_panel("Operating pressure profile", "A visual read on the main execution pressures in the current plan.")
-        st.altair_chart(style_chart(pressure_chart + pressure_points + pressure_text), use_container_width=True)
+        st.altair_chart(style_chart(pressure_chart + pressure_points + pressure_text), width="stretch")
         st.markdown("</div>", unsafe_allow_html=True)
 
     chart_panel("Schedule shape", "A planning view showing where front-end friction and schedule buffer are accumulating.")
-    st.altair_chart(style_chart(timeline_chart), use_container_width=True)
+    st.altair_chart(style_chart(timeline_chart), width="stretch")
     st.markdown("</div>", unsafe_allow_html=True)
 
 
@@ -684,7 +684,7 @@ def render_signal_chart(feature_importances: pd.DataFrame) -> None:
             text=alt.Text("importance:Q", format=".2f"),
         )
     )
-    st.altair_chart(style_chart(chart + text), use_container_width=True)
+    st.altair_chart(style_chart(chart + text), width="stretch")
 
 
 def render_driver_summary(project_input: dict[str, object], feature_importances: pd.DataFrame) -> None:
@@ -755,7 +755,7 @@ def render_comparison_chart(comparison: pd.DataFrame) -> None:
             ],
         )
     )
-    st.altair_chart(style_chart((lines + points).properties(height=220)), use_container_width=True)
+    st.altair_chart(style_chart((lines + points).properties(height=220)), width="stretch")
 
 
 def render_what_if(bundle, base_input: dict[str, object]) -> None:
@@ -814,7 +814,7 @@ def render_what_if(bundle, base_input: dict[str, object]) -> None:
     with left:
         chart_panel("Plan shift", "A before-and-after comparison of the current plan and the selected operating change.")
         render_comparison_chart(comparison)
-        st.dataframe(comparison, use_container_width=True, hide_index=True)
+        st.dataframe(comparison, width="stretch", hide_index=True)
         st.markdown("</div>", unsafe_allow_html=True)
     with right:
         st.markdown('<div class="surface">', unsafe_allow_html=True)
@@ -846,7 +846,7 @@ def render_distribution_chart(dataset: pd.DataFrame) -> None:
         )
         .properties(height=220)
     )
-    st.altair_chart(style_chart(chart), use_container_width=True)
+    st.altair_chart(style_chart(chart), width="stretch")
 
 
 def render_dataset_explorer(dataset: pd.DataFrame) -> None:
@@ -888,7 +888,7 @@ def render_dataset_explorer(dataset: pd.DataFrame) -> None:
     left, right = st.columns([0.9, 1.1])
     with left:
         st.markdown('<div class="surface">', unsafe_allow_html=True)
-        st.dataframe(summary, use_container_width=True, hide_index=True)
+        st.dataframe(summary, width="stretch", hide_index=True)
         st.markdown("</div>", unsafe_allow_html=True)
     with right:
         chart_panel("Project mix", "Quick comparisons across project types and regions.")
@@ -912,8 +912,8 @@ def render_dataset_explorer(dataset: pd.DataFrame) -> None:
             )
             .properties(height=140)
         )
-        st.altair_chart(style_chart(delay_chart), use_container_width=True)
-        st.altair_chart(style_chart(budget_chart), use_container_width=True)
+        st.altair_chart(style_chart(delay_chart), width="stretch")
+        st.altair_chart(style_chart(budget_chart), width="stretch")
         st.markdown("</div>", unsafe_allow_html=True)
 
     chart_panel("Delay distribution", "A quick look at how delay outcomes are spread across the project population.")
@@ -928,7 +928,7 @@ def render_dataset_explorer(dataset: pd.DataFrame) -> None:
         """,
         unsafe_allow_html=True,
     )
-    st.dataframe(dataset.head(20), use_container_width=True, hide_index=True)
+    st.dataframe(dataset.head(20), width="stretch", hide_index=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 
